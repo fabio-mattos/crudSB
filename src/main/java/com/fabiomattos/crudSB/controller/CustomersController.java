@@ -17,54 +17,39 @@ import java.util.Optional;
 @RequestMapping("/customers")
 public class CustomersController {
     @Autowired
-    private CustomersService pessoaService;
+    private CustomersService customersService;
 
     @Autowired
-    private CustomersRepository pessoaRepository;
+    private CustomersRepository customersRepository;
 
     @RequestMapping
     public List<CustomersDTO> findAll(){
-        List<CustomersDTO> result = pessoaService.findAll();
+        List<CustomersDTO> result = customersService.findAll();
         return result;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public CustomersDTO findById(@PathVariable Long id) {
-        CustomersDTO result = pessoaService.findById(id);
+        CustomersDTO result = customersService.findById(id);
         return result;
-
     }
 
     @PostMapping
     public Customers Post(@Validated @RequestBody Customers pessoa)
     {
-        return pessoaRepository.save(pessoa);
+        return customersRepository.save(pessoa);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customers> Put(@PathVariable(value = "id") long id, @Validated @RequestBody Customers newPessoa)
+    public ResponseEntity<Customers> Put(@PathVariable(value = "id") long id, @Validated @RequestBody Customers newCustomers)
     {
-        Optional<Customers> oldPessoa = pessoaRepository.findById(id);
-        if(oldPessoa.isPresent()){
-            Customers pessoa = oldPessoa.get();
-            pessoa.setName(newPessoa.getName());
-            pessoaRepository.save(pessoa);
-            return new ResponseEntity<Customers>(pessoa, HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+              return customersService.update(id, newCustomers);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
     {
-        Optional<Customers> pessoa = pessoaRepository.findById(id);
-        if(pessoa.isPresent()){
-            pessoaRepository.delete(pessoa.get());
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+              return customersService.delete(id);
     }
 
 }
