@@ -5,21 +5,21 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_pessoa")
-public class Pessoa {
+@Table(name = "tb_customers")
+public class Customers {
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
 
-     private String nome;
+     private String name;
 
-     public Pessoa(){
+     public Customers(){
 
      }
 
-    public Pessoa(Long id, String nome) {
+    public Customers(Long id, String name) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
     }
 
     public Long getId() {
@@ -30,19 +30,19 @@ public class Pessoa {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
+        Customers pessoa = (Customers) o;
         return Objects.equals(id, pessoa.id);
     }
 

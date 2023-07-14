@@ -1,16 +1,16 @@
 package com.fabiomattos.crudSB.dto;
 
-import com.fabiomattos.crudSB.entities.Pessoa;
+import com.fabiomattos.crudSB.entities.Customers;
 import org.springframework.beans.BeanUtils;
 
-public class PessoaDTO {
+public class CustomersDTO {
     private Long id;
     private String nome;
 
-    public PessoaDTO() {
+    public CustomersDTO() {
 
     }
-    public PessoaDTO(Pessoa entity) {
+    public CustomersDTO(Customers entity) {
         BeanUtils.copyProperties(entity, this);
     }
 
