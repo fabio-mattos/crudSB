@@ -37,74 +37,59 @@ public class CustomersControllerTest {
 
     @Test
     public void testFindAll() {
-        // Mock data
         List<CustomersDTO> mockResult = new ArrayList<>();
         when(customersService.findAll()).thenReturn(mockResult);
 
-        // Test
         List<CustomersDTO> result = customersController.findAll();
 
-        // Verify
         assertEquals(mockResult, result);
         verify(customersService, times(1)).findAll();
     }
 
     @Test
     public void testFindById() {
-        // Mock data
         long customerId = 1L;
         CustomersDTO mockResult = new CustomersDTO();
         when(customersService.findById(customerId)).thenReturn(mockResult);
 
-        // Test
         CustomersDTO result = customersController.findById(customerId);
 
-        // Verify
         assertEquals(mockResult, result);
         verify(customersService, times(1)).findById(customerId);
     }
 
     @Test
     public void testPost() {
-        // Mock data
         Customers mockCustomer = new Customers();
         when(customersRepository.save(mockCustomer)).thenReturn(mockCustomer);
 
-        // Test
         Customers result = customersController.Post(mockCustomer);
 
-        // Verify
         assertEquals(mockCustomer, result);
         verify(customersRepository, times(1)).save(mockCustomer);
     }
 
     @Test
     public void testPut() {
-        // Mock data
         long customerId = 1L;
         Customers newCustomers = new Customers();
         ResponseEntity<Customers> mockResponse = new ResponseEntity<>(HttpStatus.OK);
         when(customersService.update(customerId, newCustomers)).thenReturn(mockResponse);
 
-        // Test
         ResponseEntity<Customers> result = customersController.Put(customerId, newCustomers);
 
-        // Verify
         assertEquals(mockResponse, result);
         verify(customersService, times(1)).update(customerId, newCustomers);
     }
 
     @Test
     public void testDelete() {
-        // Mock data
         long customerId = 1L;
         ResponseEntity<Object> mockResponse = new ResponseEntity<>(HttpStatus.OK);
         when(customersService.delete(customerId)).thenReturn(mockResponse);
 
-        // Test
         ResponseEntity<Object> result = customersController.Delete(customerId);
 
-        // Verify
         assertEquals(mockResponse, result);
         verify(customersService, times(1)).delete(customerId);
     }
